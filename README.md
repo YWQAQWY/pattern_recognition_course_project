@@ -1,1 +1,0 @@
-# pattern_recognition_course_project
