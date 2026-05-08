@@ -37,7 +37,8 @@ x_test_lda = lda.transform(x_test)
 
 mlp = MLPClassifier(
     hidden_layer_sizes=(128,64),
-    activation='relu',
+    activation='sigmoid',
+    learning_rate= 0.001,
     max_iter=50,
     random_state=42
 )
@@ -49,7 +50,6 @@ acc = accuracy_score(y_test, y_pred)
 print(f"Test Accuracy: {acc:.4f}")
 
 cm = confusion_matrix(y_test, y_pred)
-
 
 print("\nClassification Report:")
 print(
