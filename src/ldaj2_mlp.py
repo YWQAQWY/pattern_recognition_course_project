@@ -65,7 +65,7 @@ for fold, (train_idx, val_idx) in enumerate(kf.split(x_trainval, y_trainval)):
     # 3c. MLP 训练
     mlp = MLPClassifier(
         hidden_layer_sizes=(128, 64),
-        activation='logistic',
+        activation='relu',
         learning_rate_init=0.001,
         max_iter=50,
         random_state=42,
