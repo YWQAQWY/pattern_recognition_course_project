@@ -67,7 +67,7 @@ for fold, (train_idx, val_idx) in enumerate(kf.split(x_trainval, y_trainval)):
         hidden_layer_sizes=(128, 64),
         activation='relu',
         learning_rate_init=0.001,
-        max_iter=50,
+        max_iter=100,
         random_state=42,
     )
     mlp.fit(x_train_fold_lda, y_train_fold)
@@ -105,9 +105,9 @@ x_test_lda = lda.transform(x_test_scaled)
 
 mlp_final = MLPClassifier(
     hidden_layer_sizes=(128, 64),
-    activation='logistic',
+    activation='relu',
     learning_rate_init=0.001,
-    max_iter=50,
+    max_iter=100,
     random_state=42,
 )
 mlp_final.fit(x_trainval_lda, y_trainval)
@@ -197,9 +197,9 @@ metrics_text = (
     f"Configuration:\n"
     f"  LDA components = {dimension}\n"
     f"  MLP hidden     = (128, 64)\n"
-    f"  Activation     = logistic\n"
+    f"  Activation     = relu\n"
     f"  Learning rate  = 0.001\n"
-    f"  Max iterations = 50"
+    f"  Max iterations = 100"
 )
 ax.text(0.05, 0.95, metrics_text, transform=ax.transAxes, fontsize=11,
         fontfamily='monospace', verticalalignment='top',

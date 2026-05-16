@@ -36,7 +36,7 @@ print(f"测试集:      {x_test.shape[0]} 样本")
 # 3. K 折交叉验证 (K=5)
 # ============================================================================
 K = 5
-dimension = 2  # PCA 降维到 2 维
+dimension = 8  
 
 kf = StratifiedKFold(n_splits=K, shuffle=True, random_state=42)
 cv_acc_scores = []
@@ -156,7 +156,11 @@ y_max = x_trainval_pca[:, 1].max() + 0.5
 
 xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.02),
                      np.arange(y_min, y_max, 0.02))
-Z = svm_final.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+
+# 将 2D 网格点扩展为 8 维 (剩余 6 维用训练集均值填充，即 0)
+grid_2d = np.c_[xx.ravel(), yy.ravel()]
+grid_full = np.hstack([grid_2d, np.zeros((grid_2d.shape[0], dimension - 2))])
+Z = svm_final.predict(grid_full).reshape(xx.shape)
 
 plt.figure(figsize=(8, 6))
 plt.contourf(xx, yy, Z, alpha=0.3, cmap='viridis')
